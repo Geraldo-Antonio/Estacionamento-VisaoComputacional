@@ -1,6 +1,6 @@
 # Estacionamento Inteligente com Visão Computacional
 
-![Exemplo de análise de estacionamento](Output_image.jpg)
+![Exemplo de análise de estacionamento](Output_image.png)
 
 Este projeto utiliza visão computacional com Python e OpenCV para analisar uma imagem da câmera de um estacionamento e determinar as vagas livres e ocupadas em tempo real. Ele oferece uma solução eficiente e inteligente para monitorar a disponibilidade de vagas em estacionamentos.
 
