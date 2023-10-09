@@ -9,6 +9,7 @@ vaga5 = [591, 90, 132, 206]
 vaga6 = [738, 93, 139, 204]
 vaga7 = [881, 93, 138, 201]
 vaga8 = [1027, 94, 147, 202]
+png = True
 
 vagas = [vaga1, vaga2, vaga3, vaga4, vaga5, vaga6, vaga7, vaga8]
 
@@ -18,8 +19,20 @@ ret, frame = video.read()
 if ret:
     largura = frame.shape[1]
     altura = frame.shape[0]
-    frame = cv2.resize(frame, (720, 480))
-    
+    #frame = cv2.resize(frame, (640, 480))
+
+#Gravação do Video Resultado
+# Define the codec for the output video
+fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # Use 'mp4v' codec for MP4 format
+
+# Get the frame dimensions and frame rate from the input video
+frame_width = int(video.get(3))
+frame_height = int(video.get(4))
+frame_rate = int(video.get(5))
+
+# Initialize the video writer for the output video
+output_video = cv2.VideoWriter('output_video.mp4', fourcc, frame_rate, (frame_width, frame_height))
+
 while True:
     ret, frame = video.read()
     if not ret:
@@ -41,10 +54,17 @@ while True:
         else:
             cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
+    #Salvando frames
+    output_video.write(frame)
+
+    if png:
+        cv2.imwrite("Output_image.png", frame)
+    png = False
     cv2.imshow("Video_output", frame)
     cv2.imshow("Video_output_binary", Dil)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
+output_video.release()
 video.release()
 cv2.destroyAllWindows()
